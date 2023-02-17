@@ -35,6 +35,7 @@ import {
   getItemById,
   getAllItem,
   deleteCheckItem,
+  searchByPage1,
 } from './CategoryService'
 
 import AgencyDialog from './CategoryDialog'
@@ -153,11 +154,12 @@ class Category extends React.Component {
     searchObject.pageSize = this.state.rowsPerPage
     searchByPage(searchObject).then(({ data }) => {
       this.setState({
-        itemList: [...data.content],
-        totalElements: data.totalElements,
+        itemList: data.data,
+        totalElements: data.data.length,
       })
     })
   }
+
   setPage = (page) => {
     this.setState({ page }, function () {
       this.updatePageData()
@@ -331,7 +333,6 @@ class Category extends React.Component {
       { title: t('general.name'), field: 'name', width: '150' },
       { title: t('general.code'), field: 'code', align: 'left', width: '150' },
     ]
-    console.log(this.state.itemList)
 
     return (
       <div className="m-sm-30">
