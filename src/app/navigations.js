@@ -24,12 +24,6 @@ export const navigations = [
         icon: 'keyboard_arrow_right',
         isVisible: true,
       },
-      {
-        name: 'Districts',
-        path: ConstantList.ROOT_PATH + 'directory/districts',
-        icon: 'keyboard_arrow_right',
-        isVisible: true,
-      },
     ],
   },
   {
@@ -47,6 +41,12 @@ export const navigations = [
         name: 'manage.user',
         isVisible: true,
         path: ConstantList.ROOT_PATH + 'user_manager/user',
+        icon: 'keyboard_arrow_right',
+      },
+      {
+        name: 'Quản lý nhân viên',
+        isVisible: true,
+        path: ConstantList.ROOT_PATH + 'list/staff',
         icon: 'keyboard_arrow_right',
       },
       {

@@ -1,19 +1,16 @@
 import { EgretLoadable } from 'egret'
 import ConstantList from '../../appConfig'
 import { withTranslation } from 'react-i18next'
-
 const Agency = EgretLoadable({
-  loader: () => import('./Districts'),
+  loader: () => import('./Staff'),
 })
-
 const ViewComponent = withTranslation()(Agency)
-
-const DistrictsRoutes = [
+const StaffRoutes = [
   {
-    path: ConstantList.ROOT_PATH + 'directory/districts',
+    path: ConstantList.ROOT_PATH + 'list/staff',
     exact: true,
     component: ViewComponent,
   },
 ]
 
-export default DistrictsRoutes
+export default StaffRoutes
