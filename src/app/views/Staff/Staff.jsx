@@ -8,12 +8,8 @@ import { searchByPage } from './StaffService'
 
 function Staff() {
   const [staffList, setStaffList] = useState([])
-  const [searchObject, setSearchObject] = useState({
-    keyword: '',
-    pageIndex: 1,
-    pageSize: 5,
-  })
-  const [openAddDialog, setOpenAddDialog] = useState(false)
+  const [searchObject, setSearchObject] = useState({})
+  const [openAddDialog, setOpenAddDialog] = useState(true)
   const { t } = useTranslation()
 
   let columns = [
@@ -49,12 +45,31 @@ function Staff() {
       field: 'age',
       width: '100px',
     },
+    {
+      title: 'Xã',
+      field: 'commune.name',
+      width: '100px',
+    },
+    {
+      title: 'Huyện',
+      field: 'district.name',
+      width: '100px',
+    },
+    {
+      title: 'Tỉnh',
+      field: 'province.name',
+      width: '100px',
+    },
   ]
 
   const updatePageData = useCallback(async () => {
     const { data } = await searchByPage(searchObject)
     setStaffList(data.data)
-  }, [searchObject])
+  }, [])
+
+  const handleClose = () => {
+    setOpenAddDialog(false)
+  }
 
   useEffect(() => {
     updatePageData()
@@ -72,7 +87,10 @@ function Staff() {
           >
             Thêm nhân viên
           </Button>
-          <StaffEditorDialog />
+
+          {openAddDialog && (
+            <StaffEditorDialog handleClose={handleClose} t={t} />
+          )}
         </Grid>
         <Grid item xs={12}>
           <MaterialTable

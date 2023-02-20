@@ -65,7 +65,7 @@
     "react-infinite-scroller": "^1.2.4",
     "react-leaf-carousel": "^2.0.3",
     "react-loadable": "^5.5.0",
-    "react-material-ui-form-validator": "^2.0.9",
+    "react-material-ui-form-validator": "2.0.9",
     "react-number-format": "^4.4.1",
     "react-pdf-print": "^0.1.9",
     "react-perfect-scrollbar": "^1.5.2",

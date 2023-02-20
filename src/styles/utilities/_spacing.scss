@@ -13,7 +13,7 @@ $spaces: (
   36: 36px,
   40: 40px,
   44: 44px,
-  48: 48px
+  48: 48px,
 );
 
 @each $name, $value in $spaces {
@@ -154,6 +154,9 @@ $spaces: (
 .mb-38 {
   margin-bottom: 38px;
 }
+.mb-12 {
+  margin-bottom: 12px;
+}
 .mb-14 {
   margin-bottom: 14px !important;
 }
@@ -243,5 +246,5 @@ $spaces: (
 }
 
 .align-bottom {
- vertical-align: bottom !important;
+  vertical-align: bottom !important;
 }
