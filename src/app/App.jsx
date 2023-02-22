@@ -2,7 +2,7 @@ import '../fake-db'
 import '../styles/_app.scss'
 import React from 'react'
 import { Provider } from 'react-redux'
-import { Router, useHistory } from 'react-router-dom'
+import { Router } from 'react-router-dom'
 import EgretTheme from './EgretLayout/EgretTheme/EgretTheme'
 import AppContext from './appContext'
 import history from 'history.js'
@@ -14,11 +14,12 @@ import routes from './RootRoutes'
 import Auth from './auth/Auth'
 import EgretLayout from './EgretLayout/EgretLayout'
 import AuthGuard from './auth/AuthGuard'
-import axios from 'axios'
 import { toast } from 'react-toastify'
-import ConstantList from '../app/appConfig'
-import { configureStore } from '@reduxjs/toolkit'
 import RootReducer from './redux/reducers/RootReducer'
+import createSagaMiddleware from '@redux-saga/core'
+import { applyMiddleware } from 'redux'
+import { configureStore } from '@reduxjs/toolkit'
+import rootSaga from './redux/sagas/rootSagas'
 
 // import UserService from "./services/UserService";
 // import httpService from "./services/HttpService";
@@ -49,7 +50,15 @@ toast.configure()
 //   }
 // );
 
-const store = configureStore({ reducer: RootReducer })
+const sagaMiddleware = createSagaMiddleware()
+
+const store = configureStore({
+  reducer: RootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(sagaMiddleware),
+})
+
+sagaMiddleware.run(rootSaga)
 
 const App = () => {
   return (
