@@ -9,15 +9,21 @@ import {
   IconButton,
 } from '@material-ui/core'
 import { Autocomplete } from '@material-ui/lab'
-import { fetchProvinces } from 'app/redux/actions/ProvincesActions'
+import {
+  fetchDistricts,
+  fetchProvinces,
+} from 'app/redux/actions/LocationActions'
 import React, { useEffect, useState } from 'react'
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 function StaffEditorDialog({ handleClose, t }) {
   const [inputs, setInputs] = useState({})
   const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
+  const { provinceList, districtList } = useSelector((store) => store.location)
+
+  console.log({ inputs, provinceList, districtList })
 
   const handleSubmit = () => {}
 
@@ -31,7 +37,10 @@ function StaffEditorDialog({ handleClose, t }) {
 
   useEffect(() => {
     dispatch(fetchProvinces({}))
+    dispatch(fetchDistricts({}))
   }, [dispatch])
+
+  useEffect(() => {}, [])
 
   return (
     <Dialog open={true} maxWidth={'xs'} fullWidth={true}>
@@ -119,7 +128,39 @@ function StaffEditorDialog({ handleClose, t }) {
                 size="small"
               />
             </Grid>
-            <Grid item xs={12}></Grid>
+            <Grid item xs={12}>
+              <Autocomplete
+                variant="outlined"
+                size="small"
+                style={{ width: '100%' }}
+                id="combo-box-demo"
+                options={provinceList}
+                getOptionSelected={(option, value) => option.id === value.id}
+                getOptionLabel={(option) => option.name}
+                onChange={(event, value) => {
+                  setInputs((prev) => {
+                    return { ...prev, province: value }
+                  })
+                }}
+                renderInput={(params) => (
+                  <TextValidator
+                    {...params}
+                    value={inputs.province}
+                    label={
+                      <span className="font">
+                        <span style={{ color: 'red' }}> * </span>
+                        Tỉnh
+                      </span>
+                    }
+                    fullWidth
+                    validators={['required']}
+                    errorMessages="Vui lòng chọn tỉnh"
+                    variant="outlined"
+                    size="small"
+                  />
+                )}
+              />
+            </Grid>
           </Grid>
         </DialogContent>
         <DialogActions spacing={4} className="flex flex-end flex-middle">
