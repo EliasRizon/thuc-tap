@@ -64,15 +64,17 @@ const App = () => {
   return (
     <AppContext.Provider value={{ routes }}>
       <Provider store={store}>
-        <EgretTheme>
-          <Auth>
-            <Router history={history}>
-              <AuthGuard>
-                <EgretLayout />
-              </AuthGuard>
-            </Router>
-          </Auth>
-        </EgretTheme>
+        <React.StrictMode>
+          <EgretTheme>
+            <Auth>
+              <Router history={history}>
+                <AuthGuard>
+                  <EgretLayout />
+                </AuthGuard>
+              </Router>
+            </Auth>
+          </EgretTheme>
+        </React.StrictMode>
       </Provider>
     </AppContext.Provider>
   )

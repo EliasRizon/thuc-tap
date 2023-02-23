@@ -2,63 +2,54 @@ import { Grid, Button } from '@material-ui/core'
 import MaterialTable from 'material-table'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import UserEditorDialog from '../User/UserEditorDialog'
 import StaffEditorDialog from './StaffEditorDialog'
 import { searchByPage } from './StaffService'
 
 function Staff() {
   const [staffList, setStaffList] = useState([])
   const [searchObject, setSearchObject] = useState({})
-  const [openAddDialog, setOpenAddDialog] = useState(true)
+  const [openAddDialog, setOpenAddDialog] = useState(false)
   const { t } = useTranslation()
+
+  // console.log(staffList)
 
   let columns = [
     {
       title: 'Tùy chọn',
       field: 'custom',
       align: 'left',
-      width: '100px',
-      headerStyle: {
-        padding: '12px',
-      },
-      cellStyle: {
-        padding: '12px',
-      },
     },
     {
-      title: 'Họ và tên',
+      title: 'Code',
+      field: 'code',
+    },
+    {
+      title: 'Họ tên',
       field: 'name',
-      width: '100px',
     },
     {
       title: 'Email',
       field: 'email',
-      width: '100px',
     },
     {
       title: 'Số điện thoại',
       field: 'phone',
-      width: '100px',
     },
     {
       title: 'Tuổi',
       field: 'age',
-      width: '100px',
     },
     {
       title: 'Xã',
       field: 'commune.name',
-      width: '100px',
     },
     {
       title: 'Huyện',
       field: 'district.name',
-      width: '100px',
     },
     {
       title: 'Tỉnh',
       field: 'province.name',
-      width: '100px',
     },
   ]
 

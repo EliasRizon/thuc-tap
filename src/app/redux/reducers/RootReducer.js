@@ -6,6 +6,8 @@ import ScrumBoardReducer from './ScrumBoardReducer'
 import NotificationReducer from './NotificationReducer'
 import EcommerceReducer from './EcommerceReducer'
 import { ProvinceReducer } from './ProvinceReducer'
+import { DistrictReducer } from './DistrictReducer'
+import { CommuneReducer } from './CommuneReducer'
 
 const RootReducer = combineReducers({
   login: LoginReducer,
@@ -15,6 +17,8 @@ const RootReducer = combineReducers({
   notification: NotificationReducer,
   ecommerce: EcommerceReducer,
   province: ProvinceReducer,
+  district: DistrictReducer,
+  commune: CommuneReducer,
 })
 
 export default RootReducer
