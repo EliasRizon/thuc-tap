@@ -15,12 +15,13 @@ import {
   clearDistrictList,
   fetchDistricts,
 } from 'app/redux/actions/DistrictActions'
+import { addEmployee } from 'app/redux/actions/EmployeeActions'
 import { fetchProvinces } from 'app/redux/actions/ProvinceActions'
 import React, { useEffect, useState } from 'react'
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
 import { useDispatch, useSelector } from 'react-redux'
 
-function StaffEditorDialog({ handleClose, t }) {
+function EmployeeEditorDialog({ handleClose, t }) {
   const [inputs, setInputs] = useState({ code: '' })
   const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
@@ -32,7 +33,10 @@ function StaffEditorDialog({ handleClose, t }) {
   // console.log({ provinces, districts })
   // console.log(communes)
 
-  const handleSubmit = () => {}
+  const handleSubmit = () => {
+    dispatch(addEmployee(inputs))
+    handleClose()
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -272,6 +276,7 @@ function StaffEditorDialog({ handleClose, t }) {
                   <TextValidator
                     {...params}
                     className="w-100 mb-12"
+                    value={inputs.district}
                     label={
                       <span className="font">
                         <span style={{ color: 'red' }}> * </span>
@@ -306,6 +311,7 @@ function StaffEditorDialog({ handleClose, t }) {
                   <TextValidator
                     {...params}
                     className="w-100 mb-12"
+                    value={inputs.commune}
                     label={
                       <span className="font">
                         <span style={{ color: 'red' }}> * </span>
@@ -338,4 +344,4 @@ function StaffEditorDialog({ handleClose, t }) {
   )
 }
 
-export default StaffEditorDialog
+export default EmployeeEditorDialog

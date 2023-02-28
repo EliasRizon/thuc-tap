@@ -1,17 +1,17 @@
 import { Grid, Button } from '@material-ui/core'
+import { fetchEmployees } from 'app/redux/actions/EmployeeActions'
 import MaterialTable from 'material-table'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import StaffEditorDialog from './StaffEditorDialog'
-import { searchByPage } from './StaffService'
+import { useDispatch, useSelector } from 'react-redux'
+import EmployeeEditorDialog from './EmployeeEditorDialog'
 
-function Staff() {
-  const [staffList, setStaffList] = useState([])
+function Employee() {
   const [searchObject, setSearchObject] = useState({})
   const [openAddDialog, setOpenAddDialog] = useState(false)
   const { t } = useTranslation()
-
-  // console.log(staffList)
+  const dispatch = useDispatch()
+  const { employees } = useSelector((store) => store.employee)
 
   let columns = [
     {
@@ -53,18 +53,13 @@ function Staff() {
     },
   ]
 
-  const updatePageData = useCallback(async () => {
-    const { data } = await searchByPage(searchObject)
-    setStaffList(data.data)
-  }, [])
-
   const handleClose = () => {
     setOpenAddDialog(false)
   }
 
   useEffect(() => {
-    updatePageData()
-  }, [updatePageData])
+    dispatch(fetchEmployees({ searchObject }))
+  }, [dispatch, searchObject])
 
   return (
     <div className="m-sm-30">
@@ -80,13 +75,13 @@ function Staff() {
           </Button>
 
           {openAddDialog && (
-            <StaffEditorDialog handleClose={handleClose} t={t} />
+            <EmployeeEditorDialog handleClose={handleClose} t={t} />
           )}
         </Grid>
         <Grid item xs={12}>
           <MaterialTable
             columns={columns}
-            data={staffList}
+            data={employees}
             title="Danh sách nhân viên"
             options={{
               search: true,
@@ -98,4 +93,4 @@ function Staff() {
   )
 }
 
-export default Staff
+export default Employee

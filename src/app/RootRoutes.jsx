@@ -14,7 +14,7 @@ import ShiftWorkRouters from './views/ShiftWork/ShiftWorkRouters'
 import TimeSheetRoutes from './views/TimeSheet/TimeSheetRoutes'
 import ColorRoutes from './views/Color/ColorRoutes'
 import CategoryRoutes from './views/Category/CategoryRoutes'
-import StaffRoutes from './views/Staff/StaffRoutes'
+import EmployeeRoutes from './views/Employee/EmployeeRoutes'
 
 const redirectRoute = [
   {
@@ -43,7 +43,7 @@ const routes = [
   ...ShiftWorkRouters,
   ...ColorRoutes,
   ...CategoryRoutes,
-  ...StaffRoutes,
+  ...EmployeeRoutes,
   ...errorRoute,
 ]
 

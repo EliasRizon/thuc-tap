@@ -46,7 +46,7 @@ export const navigations = [
       {
         name: 'Quản lý nhân viên',
         isVisible: true,
-        path: ConstantList.ROOT_PATH + 'list/staff',
+        path: ConstantList.ROOT_PATH + 'list/employee',
         icon: 'keyboard_arrow_right',
       },
       {

@@ -8,6 +8,7 @@ import EcommerceReducer from './EcommerceReducer'
 import { ProvinceReducer } from './ProvinceReducer'
 import { DistrictReducer } from './DistrictReducer'
 import { CommuneReducer } from './CommuneReducer'
+import { EmployeeReducer } from './EmployeeReducer'
 
 const RootReducer = combineReducers({
   login: LoginReducer,
@@ -19,6 +20,7 @@ const RootReducer = combineReducers({
   province: ProvinceReducer,
   district: DistrictReducer,
   commune: CommuneReducer,
+  employee: EmployeeReducer,
 })
 
 export default RootReducer
