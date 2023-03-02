@@ -1,5 +1,8 @@
 import { Grid, Button } from '@material-ui/core'
-import { fetchEmployees } from 'app/redux/actions/EmployeeActions'
+import {
+  deleteEmployee,
+  fetchEmployees,
+} from 'app/redux/actions/EmployeeActions'
 import MaterialTable from 'material-table'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -14,11 +17,6 @@ function Employee() {
   const { employees } = useSelector((store) => store.employee)
 
   let columns = [
-    {
-      title: 'Tùy chọn',
-      field: 'custom',
-      align: 'left',
-    },
     {
       title: 'Code',
       field: 'code',
@@ -39,22 +37,14 @@ function Employee() {
       title: 'Tuổi',
       field: 'age',
     },
-    {
-      title: 'Xã',
-      field: 'commune.name',
-    },
-    {
-      title: 'Huyện',
-      field: 'district.name',
-    },
-    {
-      title: 'Tỉnh',
-      field: 'province.name',
-    },
   ]
 
   const handleClose = () => {
     setOpenAddDialog(false)
+  }
+
+  const handleDelete = (employeeId) => {
+    dispatch(deleteEmployee(employeeId))
   }
 
   useEffect(() => {
@@ -64,20 +54,9 @@ function Employee() {
   return (
     <div className="m-sm-30">
       <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <Button
-            variant="contained"
-            onClick={() => {
-              setOpenAddDialog(true)
-            }}
-          >
-            Thêm nhân viên
-          </Button>
-
-          {openAddDialog && (
-            <EmployeeEditorDialog handleClose={handleClose} t={t} />
-          )}
-        </Grid>
+        {openAddDialog && (
+          <EmployeeEditorDialog handleClose={handleClose} t={t} />
+        )}
         <Grid item xs={12}>
           <MaterialTable
             columns={columns}
@@ -86,6 +65,28 @@ function Employee() {
             options={{
               search: true,
             }}
+            localization={{
+              header: {
+                actions: 'Tùy chọn',
+              },
+            }}
+            actions={[
+              {
+                icon: 'delete',
+                tooltip: 'Xóa nhân viên',
+                onClick: (event, rowData) => {
+                  handleDelete(rowData.id)
+                },
+              },
+              {
+                icon: 'add',
+                tooltip: 'Add User',
+                isFreeAction: true,
+                onClick: () => {
+                  setOpenAddDialog(true)
+                },
+              },
+            ]}
           />
         </Grid>
       </Grid>

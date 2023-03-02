@@ -1,4 +1,8 @@
-import { ADD_EMPLOYEE, FETCH_EMPLOYEES } from '../reducers/EmployeeReducer'
+import {
+  ADD_EMPLOYEE,
+  DELETE_EMPLOYEE,
+  FETCH_EMPLOYEES,
+} from '../reducers/EmployeeReducer'
 
 export const fetchEmployees = (post) => ({
   type: FETCH_EMPLOYEES,
@@ -8,4 +12,9 @@ export const fetchEmployees = (post) => ({
 export const addEmployee = (post) => ({
   type: ADD_EMPLOYEE,
   payload: post,
+})
+
+export const deleteEmployee = (id) => ({
+  type: DELETE_EMPLOYEE,
+  payload: id,
 })
