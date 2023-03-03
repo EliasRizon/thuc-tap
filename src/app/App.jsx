@@ -21,34 +21,8 @@ import { applyMiddleware } from 'redux'
 import { configureStore } from '@reduxjs/toolkit'
 import rootSaga from './redux/sagas/rootSagas'
 
-// import UserService from "./services/UserService";
-// import httpService from "./services/HttpService";
-
 loadProgressBar()
 toast.configure()
-
-// axios.interceptors.response.use(
-//   res => {
-//     // console.log(res);
-//     return res;
-//   },
-//   err => {
-//     if (err.response.status === 401) {
-//       // debugger;
-//       toast.error("Phiên làm việc đã hết hạn");
-//       // let history = useHistory();
-//       // return (<Redirect to={ConstantList.ROOT_PATH + "session/signin"} />)
-//       // console.log(Router);
-//       // history.push(`/session/signin`);
-//       window.location = 'session/signin';
-//     }
-//     if (err.response.status === 404) {
-//       debugger;
-//       toast.error("Hàm không tồn tại");
-//     }
-//     throw err;
-//   }
-// );
 
 const sagaMiddleware = createSagaMiddleware()
 

@@ -12,6 +12,7 @@ import EmployeeEditorDialog from './EmployeeEditorDialog'
 function Employee() {
   const [searchObject, setSearchObject] = useState({})
   const [openAddDialog, setOpenAddDialog] = useState(false)
+  const [openEditDialog, setOpenEditDialog] = useState(false)
   const { t } = useTranslation()
   const dispatch = useDispatch()
   const { employees } = useSelector((store) => store.employee)
