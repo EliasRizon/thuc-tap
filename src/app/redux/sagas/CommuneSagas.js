@@ -7,7 +7,6 @@ import {
 
 export function* fetchCommuneSagas(action) {
   try {
-    console.log(action.payload)
     const { data } = yield call(async () => {
       return await API.fetchCommunesApi({})
     })
